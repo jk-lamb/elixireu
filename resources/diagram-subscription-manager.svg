@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs>
+    <!-- Manager box fill gradient -->
+    <linearGradient id="managerBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#00d4ff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.015"/>
+    </linearGradient>
+
+    <!-- Down-line stroke gradient -->
+    <linearGradient id="downLineGrad" x1="300" y1="224" x2="300" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#00d4ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#00d4ff" stop-opacity="0.18"/>
+    </linearGradient>
+
+    <!-- Soft glow behind manager box -->
+    <filter id="managerGlow" x="-60%" y="-80%" width="220%" height="260%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+
+    <!-- Text-shadow glow on count "3" -->
+    <filter id="countGlow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- ── Background ── -->
+  <rect width="600" height="360" fill="#050505"/>
+
+  <!-- ── Widget boxes ── -->
+  <rect x="70"  y="24" width="140" height="40" rx="8"
+        fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="140" y="50" text-anchor="middle"
+        font-family="'JetBrains Mono',monospace" font-size="13" fill="rgba(255,255,255,0.78)">LiveView</text>
+
+  <rect x="230" y="24" width="140" height="40" rx="8"
+        fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="300" y="50" text-anchor="middle"
+        font-family="'JetBrains Mono',monospace" font-size="13" fill="rgba(255,255,255,0.78)">Widget B</text>
+
+  <rect x="390" y="24" width="140" height="40" rx="8"
+        fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="460" y="50" text-anchor="middle"
+        font-family="'JetBrains Mono',monospace" font-size="13" fill="rgba(255,255,255,0.78)">Widget C</text>
+
+  <!-- ── Converging lines ── -->
+  <line x1="140" y1="64" x2="300" y2="136" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+  <line x1="300" y1="64" x2="300" y2="136" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+  <line x1="460" y1="64" x2="300" y2="136" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+
+  <!-- ── Manager ambient glow (drawn behind box) ── -->
+  <rect x="148" y="136" width="304" height="88" rx="12"
+        fill="#00d4ff" fill-opacity="0.08" filter="url(#managerGlow)"/>
+
+  <!-- ── Subscription Manager box ── -->
+  <rect x="148" y="136" width="304" height="88" rx="12"
+        fill="url(#managerBg)" stroke="rgba(0,212,255,0.32)" stroke-width="1"/>
+
+  <text x="300" y="162" text-anchor="middle"
+        font-family="'JetBrains Mono',monospace" font-size="15.5" font-weight="600"
+        letter-spacing="1.7" fill="rgba(0,212,255,0.72)">PubSub Manager</text>
+
+  <!-- Entry: "chat:global"  →  3  (baseline-aligned at y=200) -->
+  <text x="206" y="200"
+        font-family="'JetBrains Mono',monospace" font-size="17.5"
+        fill="rgba(255,255,255,0.72)">"chat:global"</text>
+  <text x="357" y="200"
+        font-family="'JetBrains Mono',monospace" font-size="15"
+        fill="rgba(255,255,255,0.3)">→</text>
+  <text x="381" y="200"
+        font-family="'JetBrains Mono',monospace" font-size="24" font-weight="700"
+        fill="#00d4ff" filter="url(#countGlow)">3</text>
+
+  <!-- ── Down connector ── -->
+  <line x1="300" y1="224" x2="300" y2="290"
+        stroke="url(#downLineGrad)" stroke-width="2"/>
+  <text x="313" y="261"
+        font-family="'JetBrains Mono',monospace" font-size="20.5"
+        fill="rgba(0,212,255,0.62)">subscribe / unsubscribe</text>
+
+  <!-- ── PubSub box ── -->
+  <rect x="218" y="290" width="164" height="42" rx="8"
+        fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="300" y="317" text-anchor="middle"
+        font-family="'JetBrains Mono',monospace" font-size="13"
+        fill="rgba(255,255,255,0.62)">PubSub</text>
+</svg>

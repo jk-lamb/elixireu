@@ -1,0 +1,28 @@
+    <svg viewBox="0 0 460 310" xmlns="http://www.w3.org/2000/svg">
+          <!-- Top box: LiveView / render -->
+          <rect x="130" y="10" width="200" height="52" rx="10" fill="#141414" stroke="#444" stroke-width="1.5"></rect>
+          <text x="230" y="41" text-anchor="middle" fill="#888" font-family="monospace" font-size="14">LiveView / render</text>
+          <!-- Arrow down -->
+          <line x1="230" y1="62" x2="230" y2="90" stroke="#555" stroke-width="1.5"></line>
+          <polygon points="230,100 224,88 236,88" fill="#555"></polygon>
+          <!-- Horizontal split -->
+          <line x1="115" y1="100" x2="345" y2="100" stroke="#555" stroke-width="1.5"></line>
+          <!-- Left branch down -->
+          <line x1="115" y1="100" x2="115" y2="130" stroke="#555" stroke-width="1.5"></line>
+          <polygon points="115,140 109,128 121,128" fill="#555"></polygon>
+          <!-- Right branch down -->
+          <line x1="345" y1="100" x2="345" y2="130" stroke="#555" stroke-width="1.5"></line>
+          <polygon points="345,140 339,128 351,128" fill="#555"></polygon>
+          <!-- Left box: green (streams[:chat_widget]) -->
+          <rect x="20" y="140" width="190" height="155" rx="10" fill="#071810" stroke="#28c840" stroke-width="1.5"></rect>
+          <text x="115" y="168" text-anchor="middle" fill="#28c840" font-family="monospace" font-size="13">@streams[:chat_widget]</text>
+          <text x="115" y="200" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">inserts: []</text>
+          <text x="115" y="224" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">deletes: []</text>
+          <text x="115" y="262" text-anchor="middle" fill="#28c840" font-family="monospace" font-size="16" font-weight="bold">✓ pruned</text>
+          <!-- Right box: red (@chat.messages) -->
+          <rect x="250" y="140" width="190" height="155" rx="10" fill="#1a0808" stroke="#ff5f57" stroke-width="1.5"></rect>
+          <text x="345" y="168" text-anchor="middle" fill="#cc6666" font-family="monospace" font-size="13">@chat_widget.messages</text>
+          <text x="345" y="200" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">inserts: [...]</text>
+          <text x="345" y="224" text-anchor="middle" fill="#ffffff" font-family="monospace" font-size="15">deletes: [...]</text>
+          <text x="345" y="262" text-anchor="middle" fill="#ff5f57" font-family="monospace" font-size="16" font-weight="bold">✗ stale copy</text>
+        </svg>
