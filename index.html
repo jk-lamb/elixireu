@@ -7,56 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
     <link rel="stylesheet" href="styles.css">
     <style>
-/* ─── Presentation-wide utilities ─── */
-
-.eyebrow {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    color: var(--accent);
-    margin-bottom: 20px;
-}
-
-.two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    width: 100%;
-}
-
-/* ─── Stagger animations ─── */
-.anim-item {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.reveal .slides section.present .anim-item {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.reveal .slides section.present .anim-item:nth-child(1) { transition-delay: 0.08s; }
-.reveal .slides section.present .anim-item:nth-child(2) { transition-delay: 0.16s; }
-.reveal .slides section.present .anim-item:nth-child(3) { transition-delay: 0.24s; }
-.reveal .slides section.present .anim-item:nth-child(4) { transition-delay: 0.32s; }
-
-/* ─── Syntax highlight utility classes (halt-vs-cont slide) ─── */
-.kw { color: #c084fc; }
-.fn { color: #60a5fa; }
-.st { color: #4ade80; }
-.at { color: #22d3ee; }
-.cm { color: #475569; font-style: italic; }
-.op { color: #f97316; }
-.mod { color: #e2e8f0; font-weight: 500; }
-.hl { background: rgba(168,85,247,.18); border-radius: 4px; padding: 2px 5px; color: #e2e8f0; }
-.hl-g { background: rgba(34,197,94,.15); border-radius: 4px; padding: 2px 5px; color: #4ade80; }
-.hl-r { background: rgba(239,68,68,.15); border-radius: 4px; padding: 2px 5px; color: #fca5a5; }
-.hl-c { background: rgba(6,182,212,.15); border-radius: 4px; padding: 2px 5px; color: #22d3ee; }
-.check { color: #22c55e; }
-.cross { color: #ef4444; }
-
 /* ─── Per-slide color identities ─── */
 
 /* handle_event → cyan */
@@ -352,8 +302,6 @@
     - Narrate **what's happening**, not **how**. Build mystery.
     - No separate process. No hidden state.
     - Single line of setup
-    
-    ---
   </aside>
   <!-- NOTES_END -->
 </section>
@@ -383,13 +331,10 @@
     socket |> ChatWidget.assign_component(:chat_widget) # [!code highlight]
   }
 end
-
 def render(assigns) do
   ~H"""
-  &lt;div class="dashboard"&gt;
   # [!code highlight]
     &lt;ChatWidget.display state={@chat_widget} /&gt;
-  &lt;/div&gt;
   """
 end</code></pre>
   </div>
@@ -448,15 +393,13 @@ end</code></pre>
         <span style="background:#28c840"></span>
       </div>
     </div>
-    <pre class="shiki-raw"><code data-lang="elixir">
-        #  [!code focus:6]
+    <pre class="shiki-raw"><code data-lang="elixir">#  [!code focus:6]
 def assign_component(socket, key, opts \\ []) do
   state = %ChatWidget{ # [!code highlight]
     key: key,
     topic: "chat:global"
     # ...
   }
-
   socket
   |> assign(key, state)               # State in socket.assigns [!code focus] [!code highlight]
   |> subscribe(state)                 # PubSub (once per topic)
@@ -550,12 +493,9 @@ end</code></pre>
        socket) when content != "" do
 
   %ChatWidget{} = state = socket.assigns[String.to_existing_atom(key)] # [!code highlight]
-
   ChatContext.send_message(state.username, content, state.topic)
-
   {:halt, socket} #[!code highlight]
 end
-
 defp hooked_event(_event, _params, socket), do: {:cont, socket}</code></pre>
   </div>
           <!-- NOTES_START -->
@@ -581,12 +521,12 @@ defp hooked_event(_event, _params, socket), do: {:cont, socket}</code></pre>
 
       <div class="anim-item" style="border-radius:12px;border:1px solid rgba(34,197,94,.2);background:rgba(34,197,94,.03);padding:1.5rem">
         <div style="font-size:1.1rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;;margin-bottom:1.25rem">Widget Event</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.9;display:flex;flex-direction:column;gap:0;color:rgba(255,255,255,.7)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.9;display:flex;flex-direction:column;gap:0;color:var(--text-secondary)">
           <div><span class="at">"chat-widget:send"</span> <span style="color:var(--text-secondary)">(widget's event)</span></div>
           <div style="color:var(--text-primary);">│</div>
           <div><span class="check">✓</span> <span style="color:var(--text-secondary)">hooked_event/3</span></div>
           <div style="color:var(--text-primary)">│</div>
-          <div><span style="color:var(--text-secondary">"That's mine"</span> <span class="op">-&gt;</span> <span class="hl-r">{:halt, socket}</span></div>
+          <div><span style="color:var(--text-secondary)">"That's mine"</span> <span class="op">-&gt;</span> <span class="hl-r" style="background:rgba(220,38,38,.18);font-weight:700;padding:2px 7px">{:halt, socket}</span></div>
           <div style="color:var(--text-primary)">│</div>
           <div><span class="cross">✕</span> <span style="color:var(--text-secondary);text-decoration:line-through">handle_event</span> <span style="color:var(--text-secondary)">(never reached)</span></div>
         </div>
@@ -594,12 +534,12 @@ defp hooked_event(_event, _params, socket), do: {:cont, socket}</code></pre>
 
       <div class="anim-item" style="border-radius:12px;border:1px solid rgba(96,165,250,.2);background:rgba(96,165,250,.03);padding:1.5rem">
         <div style="font-size:1.1rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem">LiveView Event</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.9;display:flex;flex-direction:column;gap:0;color: var(--text-secondary">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.92rem;line-height:1.9;display:flex;flex-direction:column;gap:0;color:var(--text-secondary)">
           <div><span class="at">"save_settings"</span> <span style="color:var(--text-secondary)">(parent's event)</span></div>
           <div style="color:var(--text-primary)">│</div>
           <div><span class="check">✓</span> <span style="color:var(--text-secondary)">hooked_event/3</span></div>
           <div style="color:var(--text-primary)">│</div>
-          <div><span style="color:var(--text-secondary)">"Not mine"</span> <span class="op">-&gt;</span> <span class="hl">{:cont, socket}</span></div>
+          <div><span style="color:var(--text-secondary)">"Not mine"</span> <span class="op">-&gt;</span> <span class="hl" style="background:rgba(124,58,237,.18);font-weight:700;padding:2px 7px">{:cont, socket}</span></div>
           <div style="color:var(--text-primary)">│</div>
           <div><span class="check">✓</span> <span style="color:var(--text-secondary)">handle_event/3</span> <span style="color:var(--text-secondary)">(parent handles)</span></div>
         </div>
@@ -653,10 +593,24 @@ end</code></pre>
   <!-- NOTES_END -->
 </section>
 
+<section class="slide" data-chapter="hooked_info/2">
+  <div class="slide-eyebrow">Result — Message Received</div>
+  <div style="margin-top: 40px; display: flex; justify-content: center; align-items: center;">
+    <img src="resources/handle_info_cont.png" alt="hooked_info/2 result: badge and message update" style="max-height: 480px; height: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+  </div>
+        <!-- NOTES_START -->
+  <aside class="notes" data-markdown>
+    - PubSub message arrives → hooked_info/2 fires
+    - Message inserted into widget
+    - Badge updates: "1 messages"
+  </aside>
+  <!-- NOTES_END -->
+</section>
+
 <section class="slide" data-chapter="handle_params/3">
   <div class="slide-eyebrow">Change Chat Room via URL params</div>
   <div class="slide-title"><span class="accent">handle_params/3</span></div>
-  <div class="code-block-container" style="margin-top: 36px; max-width: 900px;">
+  <div class="code-block-container" style="margin-top: 14px; max-width: 900px;">
     <div class="code-block-header">
       <span class="code-block-lang">elixir</span>
       <div class="code-block-dots">
@@ -665,13 +619,12 @@ end</code></pre>
         <span style="background:#28c840"></span>
       </div>
     </div>
-    <pre class="shiki-raw"><code data-lang="elixir">
-# [!code focus:5]
+    <pre class="shiki-raw"><code data-lang="elixir"># [!code focus:5]
 defp hooked_params(%{"topic" => topic}, _uri, socket) do # [!code highlight]
   updated =
     for {key, %ChatWidget{} = state} <- socket.assigns, reduce: socket do # [!code highlight]
       socket ->
-        unsubscribe(state.topic) #
+        unsubscribe(state.topic)
         socket
         |> assign(key, %{state | topic: topic})
         |> reset_messages(key)
@@ -681,12 +634,13 @@ defp hooked_params(%{"topic" => topic}, _uri, socket) do # [!code highlight]
   {:cont, updated} # [!code highlight]
 end</code></pre>
   </div>
-  <div style="margin-top: 28px; font-size: 18px; color: var(--text-secondary);">Navigating to <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px; color: var(--accent);">?topic=private</code> switches rooms automatically.</div>
+  <div style="margin-top: 12px; font-size: 18px; color: var(--text-secondary);">Navigating to <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px; color: var(--accent);">?topic=private</code> switches rooms automatically.</div>
           <!-- NOTES_START -->
   <aside class="notes" data-markdown>
-    - "Navigate to `?topic=private` -&gt; switches rooms automatically. 
+    - "Navigate to `?topic=private` -&gt; switches rooms automatically.
     - PubSub resubscribe.
     - Back-reference: "This is what happened when I clicked that link in the demo."
+    - Problem: PubSub Subcription
   </aside>
   <!-- NOTES_END -->
 </section>
@@ -703,11 +657,12 @@ end</code></pre>
           <!-- NOTES_START -->
   <aside class="notes" data-markdown>
     - Problem: shared subscriptions
+    - Subcribption per process = not per widget
     - One widget unsubscribes = all lose feed
     - Solution: Subscription Manager
-    - Owns single subscription
-    - Tracks consumer count
-    - Consumers request via (**not directly**)
+        - Owns single subscription
+        - Tracks consumer count
+        - Consumers request via (**not directly**)
     - Manages subscribe/unsubscribe
   </aside>
   <!-- NOTES_END -->
@@ -809,8 +764,7 @@ end</code></pre>
     </div>
   </div>
   <div style="margin-top: 50px; display: flex; flex-direction: column; gap: 12px; align-items: center;">
-    <img src="resources/hooked-on-widgets-a-better-pattern-for-reusable-l_lambrych_1112248_feedback-code.png" alt="Session feedback QR Code" style="width: 180px; height: 180px; border-radius: 16px;">
-    <div style="font-size: 16px; color: var(--text-secondary);">Session feedback</div>
+    <img src="resources/linked-in-blue.svg" alt="LinkedIn" style="width: 180px; height: 180px; border-radius: 16px;">
   </div>
   <!-- NOTES_START -->
   <aside class="notes" data-markdown>
@@ -826,7 +780,7 @@ end</code></pre>
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@14/dist/markdown-it.min.js"></script>
 
     <script type="module">
         import { codeToHtml } from 'https://esm.sh/shiki';
@@ -857,7 +811,7 @@ end</code></pre>
                 const code = codeEl.textContent;
                 const html = await codeToHtml(code, {
                     lang,
-                    theme: 'tokyo-night',
+                    theme: 'github-light-high-contrast',
                     transformers: [
                         transformerNotationHighlight(),
                         transformerNotationDiff(),
